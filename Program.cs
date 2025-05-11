@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 
 class Program
 {
@@ -15,7 +14,7 @@ class Program
         for (int i = 0; i < array.Length; i++)
         {
             array[i] = rand.Next(1, 101);
-            Console.Write($"{array[i],4}"); 
+            Console.Write($"{array[i],4}");
             if ((i + 1) % 10 == 0)
                 Console.WriteLine();
         }
@@ -31,41 +30,51 @@ class Program
             }
         } while (limit < 1 || limit > 100);
 
+        // Підрахунок кількості елементів 
+        int count = 0;
+        foreach (int num in array)
+        {
+            if (num < limit)
+                count++;
+        }
+
         // Створення другого масиву
-        List<int> filteredList = new List<int>();
+        int[] secondArray = new int[count];
+        int index = 0;
         foreach (int num in array)
         {
             if (num < limit)
             {
-                filteredList.Add(num);
+                secondArray[index] = num;
+                index++;
             }
         }
 
-        Console.WriteLine("\nДругий масив (елементи менші за " + limit + "):");
-        for (int i = 0; i < filteredList.Count; i++)
+        // Виведення другого масиву
+        Console.WriteLine($"\nДругий масив (елементи менші за {limit}):");
+        for (int i = 0; i < secondArray.Length; i++)
         {
-            Console.Write($"{filteredList[i],4}");
+            Console.Write($"{secondArray[i],4}");
             if ((i + 1) % 10 == 0)
                 Console.WriteLine();
         }
 
-        // Обчислення добутку та кількості
+        // Обчислення добутку
         long product = 1;
-        int count = filteredList.Count;
 
-        if (count == 0)
+        if (secondArray.Length == 0)
         {
             Console.WriteLine("\n\nНемає елементів менших за задане значення.");
         }
         else
         {
-            foreach (int num in filteredList)
+            foreach (int num in secondArray)
             {
                 product *= num;
             }
 
-            Console.WriteLine("\n\nКількість елементів у другому масиві: " + count);
-            Console.WriteLine("Добуток елементів другого масиву: " + product);
+            Console.WriteLine($"\n\nКількість елементів у другому масиві: {secondArray.Length}");
+            Console.WriteLine($"Добуток елементів другого масиву: {product}");
         }
 
         Console.WriteLine("\nНатисніть будь-яку клавішу для завершення...");
